@@ -15,9 +15,12 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyparser.urlencoded({extended:true}));
 
+
+
 app.get("/",function(req, res){
     res.sendFile(__dirname + "/signup.html")
 })
+
 
 app.post("/",function(req ,res){
 
@@ -44,15 +47,15 @@ app.post("/",function(req ,res){
         auth: "ajit1:" +MAPI_KEY
     };
 
- const request =  https.request(url, Options, function(respnse){
+ const request =  https.request(url, Options, function(response){
 
-    if(respnse.statusCode === 200){
+    if(response.statusCode === 200){
         res.sendFile(__dirname +"/succes.html");
     }
     else{
         res.sendFile(__dirname +"/fail.html");
     }
-respnse.on("data",function(data){
+response.on("data",function(data){
     console.log(JSON.parse(data));
 })
 })
